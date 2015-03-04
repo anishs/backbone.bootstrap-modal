@@ -130,7 +130,8 @@
         escape: true,
         animate: false,
         template: template,
-        enterTriggersOk: false
+        enterTriggersOk: false,
+        additionalModalClasses: null
       }, options);
     },
 
@@ -146,6 +147,10 @@
 
       //Create the modal container
       $el.html(options.template(options));
+
+      if (options.additionalModalClasses) {
+        $el.find('.modal-dialog').addClass(options.additionalModalClasses);
+      }
 
       var $content = this.$content = $el.find('.modal-body')
 
@@ -172,15 +177,6 @@
 
       var self = this,
           $el = this.$el;
-
-      $el.one('show.bs.modal', function() {
-        if (self.options.content && self.options.content.trigger) {
-          self.options.content.trigger('show', self);
-        }
-
-        self.trigger('show');
-      });
-
 
       //Create it
       $el.modal(_.extend({
