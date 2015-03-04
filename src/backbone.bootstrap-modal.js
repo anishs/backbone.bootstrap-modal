@@ -173,6 +173,15 @@
       var self = this,
           $el = this.$el;
 
+      $el.one('show.bs.modal', function() {
+        if (self.options.content && self.options.content.trigger) {
+          self.options.content.trigger('show', self);
+        }
+
+        self.trigger('show');
+      });
+
+
       //Create it
       $el.modal(_.extend({
         keyboard: this.options.allowCancel,
